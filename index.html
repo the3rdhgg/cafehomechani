@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>차니의 cafe home</title>
+  <link rel="stylesheet" href="https://s3.ap-northeast-2.amazonaws.com/materials.spartacodingclub.kr/easygpt/default.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0; /* 여기에 원하는 배경 색상 코드를 입력하세요 */
+    }
+
+    header {
+      background-image: url('차니의홈카페.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: white;
+      text-align: center;
+      padding: 30px;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    .hero {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .coffee-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin: 20px;
+    }
+
+    .coffee-item {
+      text-align: center;
+      margin-bottom: 20px;
+      border-radius: 10px; /* 모서리가 둥근 사각형을 위한 속성 */
+      overflow: hidden; /* 모서리가 둥근 효과를 주기 위해 추가 */
+      transition: transform 0.2s ease-in-out; /* 부드러운 변화를 위한 속성 */
+      text-align: center;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+    width: calc(25% - 20px); /* 2개의 아이템이 한 줄에 들어가도록 조정 */
+    margin-right: 20px; /* 각 카드 사이의 간격을 조정 */
+  }
+
+/* 화면 크기가 768px 이하일 때 스타일 수정 */
+@media (max-width: 768px) {
+  .coffee-item {
+    width: calc(33.33% - 20px); /* 3개의 아이템이 한 줄에 들어가도록 조정 */
+  }
+}
+
+/* 화면 크기가 576px 이하일 때 스타일 수정 */
+@media (max-width: 576px) {
+  .coffee-item {
+    width: calc(50% - 20px); /* 2개의 아이템이 한 줄에 들어가도록 조정 */
+  }
+}
+
+  
+    .coffee-item img {
+      width: 200px;
+      height: 250px;
+      margin-bottom: 10px;
+    }
+
+    .coffee-item span {
+      display: block;
+      color: #777;
+    }
+
+    .coffee-item:hover {
+     transform: scale(1.05); /* 호버 시 약간 커지는 효과를 주기 위한 속성 */
+    }
+
+    button {
+      background-color: #8294c4;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #0c134f;
+    }
+
+    /* 팝업 스타일 */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background-color: white;
+      border: 1px solid #ccc;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      z-index: 999;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 998;
+    }
+
+    /* 이름 입력 팝업 스타일 */
+    .name-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background-color: white;
+      border: 1px solid #ccc;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      z-index: 999;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+
+    /* 주문 내역 스타일 */
+    .order-history {
+      margin: 20px;
+    }
+
+    .order-history-item {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>ㅤ</h1>
+  </header>
+
+  <div class="hero bg-dark text-center py-5">
+    <h2 class="text-white">세상 어디서도 맛 볼 수 없는 커피</h2>
+  </div>
+
+  <div class="coffee-container">
+    <!-- 아이스 아메리카노 -->
+    <div class="coffee-item">
+      <img src="아이스 아메리카노.jpg" alt="아메리카노 이미지">
+      <span>아이스 아메리카노</span>
+      <span>₩4,000</span>
+      <button onclick="openNamePopup('아이스 아메리카노', 4000)">주문하기</button>
+    </div>
+
+    <!-- 아인슈패너 -->
+   <div class="coffee-item">
+     <img src="아이스 아인슈패너.jpg" alt="아인슈패너 이미지">
+     <span>아이스 아인슈패너</span>
+     <span>₩6,500</span>
+     <button onclick="('아이스 아인슈패너', 6500)">품절</button>
+   </div>
+
+    <!-- 아이스 연유라떼 -->
+    <div class="coffee-item">
+     <img src="연유라떼.jpg" alt="연유라떼 이미지">
+     <span>아이스 연유라떼</span>
+     <span>₩6,500</span>
+     <button onclick="('아이스 연유라떼', 6500)">품절</button>
+    </div>
+
+    <!-- 카페라떼 -->
+    <div class="coffee-item">
+     <img src="카페라떼.png" alt="카페라떼 이미지">
+     <span>카페라떼</span>
+     <span>₩4,500</span>
+     <button onclick="('카페라떼', 4500)">품절</button>
+    </div>
+
+    <!-- 아이스 바닐라라떼 -->
+    <div class="coffee-item">
+     <img src="아이스 바닐라라떼.jpg" alt="아이스 바닐라라떼 이미지">
+      <span>아이스 바닐라라떼</span>
+      <span>₩6,000</span>
+      <button onclick="openNamePopup('아이스 바닐라라떼', 4500)">주문하기</button>
+    </div>
+
+    <!-- 아이스 그린티라떼 -->
+    <div class="coffee-item">
+      <img src="아이스 그린티라떼.jpg" alt="아이스 그린티라떼 이미지">
+      <span>아이스 그린티라떼</span>
+      <span>₩6,000</span>
+      <button onclick="('아이스 그린티라떼', 5000)">품절</button>
+    </div>
+
+    <!-- 아이스 밀크티 -->
+    <div class="coffee-item">
+      <img src="밀크티.jpeg" alt="아이스 밀크티 이미지">
+      <span>아이스 밀크티</span>
+      <span>가격: ₩6,000</span>
+      <button onclick="openNamePopup('아이스 밀크티', 6000)">주문하기</button>
+    </div>
+
+    <!-- 복숭아 아이스티 -->
+    <div class="coffee-item">
+     <img src="아이스티.png" alt="아이스티 이미지">
+     <span>복숭아 아이스티</span>
+     <span>₩3,000</span>
+     <button onclick="openNamePopup('복숭아 아이스티', 3000)">주문하기</button>
+    </div>
+  
+    <!-- 생수 -->
+     <div class="coffee-item">
+     <img src="생수.jpg" alt="생수 이미지">
+     <span>생수</span>
+     <span>₩1,000</span>
+     <button onclick="openNamePopup('생수', 1000)">주문하기</button>
+    </div>
+</div>
+  </div>
+
+  <!-- 이름 입력 팝업 -->
+  <div class="overlay" id="nameOverlay"></div>
+  <div class="name-popup" id="namePopup">
+    <h3>주문자 정보 입력</h3>
+    <input type="text" id="customerName" placeholder="이름">
+    <button onclick="closeNamePopup()">취소</button>
+    <button onclick="orderCoffeeWithCustomerName()">주문하기</button>
+  </div>
+
+  <!-- 주문 정보 팝업 -->
+  <div class="overlay" id="overlay"></div>
+  <div class="popup" id="popup">
+    <h3>주문 정보</h3>
+    <p id="coffeeName"></p>
+    <p id="coffeePrice"></p>
+    <p id="orderTime"></p>
+    <p id="customerInfo"></p>
+    <button onclick="closePopup()">닫기</button>
+  </div>
+
+  <!-- 주문 내역 -->
+  <div class="order-history">
+    <h2>주문 내역</h2>
+    <div id="orderHistoryList"></div>
+  </div>
+
+  <script>
+    let currentCoffeeName = "";
+    let currentCoffeePrice = 0;
+    let orderHistory = [];
+
+    function openNamePopup(coffeeName, coffeePrice) {
+      // 현재 커피 정보 저장
+      currentCoffeeName = coffeeName;
+      currentCoffeePrice = coffeePrice;
+
+      // 이름 입력 팝업 열기
+      document.getElementById('nameOverlay').style.display = 'block';
+      document.getElementById('namePopup').style.display = 'block';
+    }
+
+    function closeNamePopup() {
+      // 이름 입력 팝업 닫기
+      document.getElementById('nameOverlay').style.display = 'none';
+      document.getElementById('namePopup').style.display = 'none';
+    }
+
+    function orderCoffeeWithCustomerName() {
+      // 주문자 이름 가져오기
+      const customerName = document.getElementById('customerName').value;
+
+      // 주문 정보 표시
+      document.getElementById('coffeeName').innerText = `커피 종류: ${currentCoffeeName}`;
+      document.getElementById('coffeePrice').innerText = `가격: ₩${currentCoffeePrice}`;
+      document.getElementById('orderTime').innerText = `주문 일시: ${new Date().toLocaleString()}`;
+      document.getElementById('customerInfo').innerText = `주문자: ${customerName}`;
+
+      // 주문 내역에 추가
+      const orderDetails = {
+        coffeeName: currentCoffeeName,
+        coffeePrice: currentCoffeePrice,
+        orderTime: new Date().toLocaleString(),
+        customerName: customerName,
+      };
+      orderHistory.push(orderDetails);
+
+      // 팝업 열기
+      document.getElementById('overlay').style.display = 'block';
+      document.getElementById('popup').style.display = 'block';
+
+      // 이름 입력 팝업 닫기
+      closeNamePopup();
+
+      // 업데이트된 주문 내역 보여주기
+      updateOrderHistory();
+    }
+
+    function closePopup() {
+      // 주문 정보 팝업 닫기
+      document.getElementById('overlay').style.display = 'none';
+      document.getElementById('popup').style.display = 'none';
+    }
+
+    function updateOrderHistory() {
+      const orderHistoryList = document.getElementById('orderHistoryList');
+      orderHistoryList.innerHTML = ""; // Clear the existing list
+
+      orderHistory.forEach((order, index) => {
+        const orderItem = document.createElement('div');
+        orderItem.classList.add('order-history-item');
+        orderItem.innerHTML = `<p><strong>주문번호 ${index + 1}</strong></p>
+                              <p>커피 종류: ${order.coffeeName}</p>
+                              <p>가격: ₩${order.coffeePrice}</p>
+                              <p>주문 일시: ${order.orderTime}</p>
+                              <p>주문자: ${order.customerName}</p>`;
+        orderHistoryList.appendChild(orderItem);
+      });
+    }
+  </script>
+</body>
+</html>
+<!-- 관리자를 위한 로그인 버튼 추가 -->
+<button onclick="openLoginPopup()">관리자 로그인</button>
+
+<script>
+  let isAdminLoggedIn = false;
+
+  function openLoginPopup() {
+    const password = prompt("관리자 비밀번호를 입력하세요:");
+
+    // 입력된 비밀번호가 올바른지 확인합니다 (이것은 간단한 예제입니다)
+    if (password === "010126") {
+      isAdminLoggedIn = true;
+      // 관리자가 로그인한 경우에만 주문 내역을 표시합니다
+      updateOrderHistory();
+    } else {
+      alert("비밀번호가 올바르지 않습니다. 다시 시도하세요.");
+    }
+  }
+
+  function updateOrderHistory() {
+    const orderHistoryList = document.getElementById('orderHistoryList');
+
+    // 기존 목록을 지웁니다
+    orderHistoryList.innerHTML = "";
+
+    if (isAdminLoggedIn) {
+      orderHistory.forEach((order, index) => {
+        const orderItem = document.createElement('div');
+        orderItem.classList.add('order-history-item');
+        orderItem.innerHTML = `<p><strong>주문번호 ${index + 1}</strong></p>
+                              <p>커피 종류: ${order.coffeeName}</p>
+                              <p>가격: ₩${order.coffeePrice}</p>
+                              <p>주문 일시: ${order.orderTime}</p>
+                              <p>주문자: ${order.customerName}</p>`;
+        orderHistoryList.appendChild(orderItem);
+      });
+    } else {
+      // 관리자만 주문 내역을 볼 수 있다는 메시지를 표시합니다
+      const message = document.createElement('p');
+      message.innerText = "주문 내역은 관리자만 볼 수 있습니다.";
+      orderHistoryList.appendChild(message);
+    }
+  }
+</script>
